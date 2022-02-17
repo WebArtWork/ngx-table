@@ -9,7 +9,8 @@ import { TableComponent } from './table.component';
 	declarations: [
 		TableComponent
 	],
-	providers: []
+	providers: [],
+	exports: [TableComponent]
 
 })
 
