@@ -1,46 +1,33 @@
-import { Directive, TemplateRef, Input, OnInit } from '@angular/core';
+import { Directive, TemplateRef, Input } from '@angular/core';
 
 @Directive({
-  selector: 'ng-template[cell]'
+	selector: 'ng-template[cell]'
 })
-export class CellDirective implements OnInit{  
-	@Input('cell') cell; 
-	constructor(public template: TemplateRef<any>) {
+export class CellDirective {
+	@Input() cell: any;
 
-	}
-	ngOnInit() {
-	}
+	constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({
-  selector: 'ng-template[sort]'
+	selector: 'ng-template[sort]'
 })
-export class SortDirective implements OnInit{
-	@Input('cell') cell; 
-	constructor(public template: TemplateRef<any>) {
+export class SortDirective {
+	@Input() cell: any;
 
-	}
-	ngOnInit() {
-	}
+	constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({
-  selector: 'ng-template[actions]'
+	selector: 'ng-template[actions]'
 })
-export class ActionsDirective implements OnInit{
-	constructor(public template: TemplateRef<any>) {
-
-	}
-	ngOnInit() {
-	}
+export class ActionsDirective {
+	constructor(public template: TemplateRef<any>) {}
 }
-@Directive({
-  selector: 'ng-template[customEdit]'
-})
-export class CustomEditDirective implements OnInit{
-	constructor(public template: TemplateRef<any>) {
 
-	}
-	ngOnInit() {
-	}
+@Directive({
+	selector: 'ng-template[customEdit]'
+})
+export class CustomEditDirective {
+	constructor(public template: TemplateRef<any>) {}
 }
