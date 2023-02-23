@@ -46,12 +46,15 @@ html.dark:root {
 	border-radius: 10px;
 	padding: 20px;
 	padding-bottom: 70px;
-	max-width: 1210px;
+	max-width: 100%;
 	height: auto;
 	margin: 0px auto;
 	position: relative;
 	@media screen and (max-width: 599px) {
-		padding-bottom: 80px;
+		padding-bottom: 30px;
+		.item-page__text{
+			display: none;
+		}
 	}
 	.table {
 		border-collapse: collapse;
@@ -159,7 +162,7 @@ html.dark:root {
 		}
 		th {
 			position: relative;
-			padding: 15px 10px;
+			padding: 10px;
 			text-align: center;
 			border-right: 2px solid var(--c-border);
 			border-bottom: 0.5px solid var(--c-border);
@@ -196,10 +199,13 @@ html.dark:root {
 				display: none;
 				text-align: left;
 			}
+			&:last-child {
+				width: 160px;
+			}
 		}
 		td {
 			cursor: pointer;
-			padding: 15px 10px;
+			padding: 10px;
 			text-align: center;
 			vertical-align: middle;
 			border-right: 2px solid var(--c-border);
@@ -261,7 +267,10 @@ html.dark:root {
 
 		.table-body {
 			&__last-td {
-				// margin-bottom: 30px; 
+				margin-bottom: 30px;
+				& i + i {
+					margin-left: 15px;
+				}
 			}
 		}
 		&-footer {
@@ -279,6 +288,16 @@ html.dark:root {
 				height: 80px;
 				padding: 10px 20px;
 				flex-direction: column;
+				position: static;
+				display: flex;
+				.table-plus-btn{
+					position: absolute;
+					top: 9px;
+					font-size: 32px;
+					left: 25px;
+					width: 30px;
+					height: 30px;
+				}
 			}
 			&__pagination {
 				grid-column: 12;
@@ -386,6 +405,9 @@ html.dark:root {
 					margin: 0 10px;
 					color: #334d6e;
 					font-weight: bold;
+					@media screen and (max-width: 599px) {
+						margin: 0 10px 0 0;
+					}
 					.caption {
 						background-color: #f2f2f2;
 						padding: 11px 24px;
@@ -394,6 +416,9 @@ html.dark:root {
 						&:hover {
 							background-color: rgb(83, 161, 214);
 							color: var(--c-bg-secondary);
+						}
+						@media screen and (max-width: 599px) {
+							padding: 8px 10px;
 						}
 					}
 					.list {
@@ -409,6 +434,9 @@ html.dark:root {
 							>div {
 								padding: 11px 24px;
 								cursor: pointer;
+								@media screen and (max-width: 599px) {
+									padding: 10px 10px;
+								}
 							}
 							&:hover {
 								background-color: rgb(83, 161, 214);
@@ -514,6 +542,7 @@ html.dark:root {
 	}
 
 	@media all and (max-width: 991px) {
-		width: 90%;
+		width: 100%;
 	}
+	
 }
