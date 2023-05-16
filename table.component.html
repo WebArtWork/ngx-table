@@ -1,14 +1,14 @@
 <div class="wtable">
 	<div class="users__header w-card__header" *ngIf="title">
 		{{title}}
-		<button
-			*ngIf="config.create"
-			class="table-plus-btn"
+		<wbutton
 			(click)="config.create()"
+			class="table-plus-btn"
+			*ngIf="config.create"
 			type="button"
 		>
 			+ <span>Add new</span>
-		</button>
+		</wbutton>
 	</div>
 	<div class="table-flex _jc-sb _ai-c">
 		<div
@@ -160,34 +160,34 @@
 				</div>
 			</div>
 			<div class="table-footer__pagination" *ngIf="config.perPage">
-				<button
-					[disabled]="config.page === 1"
+				<wbutton
 					class="table-footer__arrow _start"
+					[disabled]="config.page === 1"
 					(click)="config.page = 1"
 				>
 					<i class="chevron"></i>
-				</button>
-				<button
-					[disabled]="config.page === 1"
+				</wbutton>
+				<wbutton
 					class="table-footer__arrow _left"
+					[disabled]="config.page === 1"
 					(click)="previous()"
 				>
 					<i class="chevron"></i>
-				</button>
-				<button
+				</wbutton>
+				<wbutton
 					[disabled]="config.page*config.perPage > rows?.length"
 					class="table-footer__arrow _right"
 					(click)="next()"
 				>
 					<i class="chevron"></i>
-				</button>
-				<button
-					[disabled]="isLast()"
+				</wbutton>
+				<wbutton
 					class="table-footer__arrow _end"
+					[disabled]="isLast()"
 					(click)="lastPage()"
 				>
 					<i class="chevron"></i>
-				</button>
+				</wbutton>
 			</div>
 		</tfoot>
 	</table>
