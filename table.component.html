@@ -3,7 +3,12 @@
 		<h3 class="w-forms__title">{{title}}</h3>
 		<ng-container *ngIf="config.headerButtons">
 			<ng-container *ngFor="let button of config.headerButtons">
-				<wbutton (click)="button.click()" class="table-plus-btn" *ngIf="config.create" type="button">
+				<wbutton
+					(click)="button.click()"
+					class="table-plus-btn"
+					*ngIf="config.create"
+					type="button"
+				>
 					<i
 						class="material-icons"
 						[title]="button.icon"
@@ -63,7 +68,9 @@
 						</span>
 					</div>
 				</th>
-				<th *ngIf="config.delete||config.update">
+				<th
+					*ngIf="config.delete || config.update || config.buttons?.length"
+				>
 					<ng-template #customAction>
 						<ng-container
 							*ngTemplateOutlet="action.template"
@@ -103,54 +110,59 @@
 					*ngIf="config.delete || config.update || config.buttons"
 					data-label="Actions:&nbsp;"
 				>
-				<div class="table__actions">
-					<ng-container *ngIf="config.buttons">
-						<ng-container *ngFor="let button of config.buttons">
-							<i
-								(click)="button.click(row)"
-								class="material-icons"
-								[title]="button.icon"
-								*ngIf="!button.href && !button.hrefFunc"
-							>
-								{{button.icon}}
-							</i>
-							<a routerLink="{{button.href}}" *ngIf="button.href">
+					<div class="table__actions">
+						<ng-container *ngIf="config.buttons">
+							<ng-container *ngFor="let button of config.buttons">
 								<i
+									(click)="button.click(row)"
 									class="material-icons"
 									[title]="button.icon"
+									*ngIf="!button.href && !button.hrefFunc"
 								>
 									{{button.icon}}
 								</i>
-							</a>
-							<a routerLink="{{button.hrefFunc(row)}}" *ngIf="button.hrefFunc">
-								<i
-									class="material-icons"
-									[title]="button.icon"
+								<a
+									routerLink="{{button.href}}"
+									*ngIf="button.href"
 								>
-									{{button.icon}}
-								</i>
-							</a>
+									<i
+										class="material-icons"
+										[title]="button.icon"
+									>
+										{{button.icon}}
+									</i>
+								</a>
+								<a
+									routerLink="{{button.hrefFunc(row)}}"
+									*ngIf="button.hrefFunc"
+								>
+									<i
+										class="material-icons"
+										[title]="button.icon"
+									>
+										{{button.icon}}
+									</i>
+								</a>
+							</ng-container>
 						</ng-container>
-					</ng-container>
 
-					<i
-						class="material-icons"
-						*ngIf="config.update"
-						(click)="config.update(row)"
-						title="Edit"
-					>
-						edit
-					</i>
-					<i
-						class="material-icons"
-						*ngIf="config.delete"
-						(click)="config.delete(row)"
-						title="Delete"
-					>
-						delete_outline
-					</i>
-				</div>
-
+						<i
+							class="material-icons"
+							*ngIf="config.update"
+							(click)="config.update(row)"
+							title="Edit"
+						>
+							edit
+						</i>
+						<i
+							class="material-icons"
+							*ngIf="config.delete"
+							(click)="config.delete(row)"
+							title="Delete"
+						>
+							delete_outline
+						</i>
+					</div>
 				</td>
 			</tr>
 		</tbody>
