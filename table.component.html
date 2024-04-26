@@ -121,77 +121,79 @@
 					<div class="table__actions">
 						<ng-container *ngIf="config.buttons">
 							<ng-container *ngFor="let button of config.buttons">
-								<i
-									(click)="button.click(row)"
-									class="material-icons"
-									[title]="button.icon"
-									*ngIf="
-										!button.ahref &&
-										!button.ahrefFunc &&
-										!button.href &&
-										!button.hrefFunc
-									"
-								>
-									{{button.icon}}
-								</i>
-								<a
-									[href]="button.ahref"
-									[target]="button.target || '_blank'"
-									*ngIf="button.href"
-								>
+								<ng-container *ngIf="button">
 									<i
+										(click)="button.click(row)"
 										class="material-icons"
 										[title]="button.icon"
+										*ngIf="
+											!button.ahref &&
+											!button.ahrefFunc &&
+											!button.href &&
+											!button.hrefFunc
+										"
 									>
 										{{button.icon}}
 									</i>
-								</a>
-								<a
-									[href]="button.ahrefFunc(row)"
-									[target]="button.target || '_blank'"
-									*ngIf="button.ahrefFunc"
-								>
-									<i
-										class="material-icons"
-										[title]="button.icon"
+									<a
+										[href]="button.ahref"
+										[target]="button.target || '_blank'"
+										*ngIf="button.href"
 									>
-										{{button.icon}}
-									</i>
-								</a>
-								<a
-									[href]="button.ahref"
-									[target]="button.target || '_blank'"
-									*ngIf="button.href"
-								>
-									<i
-										class="material-icons"
-										[title]="button.icon"
+										<i
+											class="material-icons"
+											[title]="button.icon"
+										>
+											{{button.icon}}
+										</i>
+									</a>
+									<a
+										[href]="button.ahrefFunc(row)"
+										[target]="button.target || '_blank'"
+										*ngIf="button.ahrefFunc"
 									>
-										{{button.icon}}
-									</i>
-								</a>
-								<a
-									routerLink="{{button.href}}"
-									*ngIf="button.href"
-								>
-									<i
-										class="material-icons"
-										[title]="button.icon"
+										<i
+											class="material-icons"
+											[title]="button.icon"
+										>
+											{{button.icon}}
+										</i>
+									</a>
+									<a
+										[href]="button.ahref"
+										[target]="button.target || '_blank'"
+										*ngIf="button.href"
 									>
-										{{button.icon}}
-									</i>
-								</a>
-								<a
-									routerLink="{{button.hrefFunc(row)}}"
-									*ngIf="button.hrefFunc"
-								>
-									<i
-										class="material-icons"
-										[title]="button.icon"
+										<i
+											class="material-icons"
+											[title]="button.icon"
+										>
+											{{button.icon}}
+										</i>
+									</a>
+									<a
+										routerLink="{{button.href}}"
+										*ngIf="button.href"
 									>
-										{{button.icon}}
-									</i>
-								</a>
+										<i
+											class="material-icons"
+											[title]="button.icon"
+										>
+											{{button.icon}}
+										</i>
+									</a>
+									<a
+										routerLink="{{button.hrefFunc(row)}}"
+										*ngIf="button.hrefFunc"
+									>
+										<i
+											class="material-icons"
+											[title]="button.icon"
+										>
+											{{button.icon}}
+										</i>
+									</a>
+								</ng-container>
 							</ng-container>
 						</ng-container>
 

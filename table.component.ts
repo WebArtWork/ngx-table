@@ -24,7 +24,7 @@ import { StoreService } from 'wacom';
 	styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, AfterContentInit {
-	constructor(private _router: Router, private _store: StoreService) {}
+	constructor(private _router: Router, private _store: StoreService) { }
 
 	tableId =
 		'table_' +
@@ -138,7 +138,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 			this.custom_cell[cell.cell] = cell.template;
 		}
 
-		const interval = setInterval(()=>{
+		const interval = setInterval(() => {
 			this.refresh();
 		}, 1000);
 		setTimeout(() => {
@@ -184,7 +184,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 		return (
 			(this.rows &&
 				this.config.page ==
-					Math.ceil(this.rows.length / this.config.perPage)) ||
+				Math.ceil(this.rows.length / this.config.perPage)) ||
 			false
 		);
 	}
