@@ -1,5 +1,5 @@
 <div class="wtable">
-	<div class="users__header w-card__header" *ngIf="title">
+	<div class="users__header w-card__header">
 		<h3 class="w-forms__title">{{title}}</h3>
 
 		<div
@@ -22,11 +22,14 @@
 				search
 			</span>
 		</div>
-        <div class="table-search__icon-mobile" *ngIf="!searchShow">
-        	<span class="material-icons material-symbols-outlined" (click)="searchShow = true">
-        		search
-        	</span>
-        </div>
+		<div class="table-search__icon-mobile" *ngIf="!searchShow">
+			<span
+				class="material-icons material-symbols-outlined"
+				(click)="searchShow = true"
+			>
+				search
+			</span>
+		</div>
 
 		<ng-container *ngIf="config.headerButtons">
 			<ng-container *ngFor="let button of config.headerButtons">
@@ -93,7 +96,7 @@
 		</thead>
 		<tbody class="table-body">
 			<tr
-				*ngFor="let row of rows|search: filter_filter: (config.searchBy||'title')|perPage: config: sort_type: filter_filter + now index as i; "
+				*ngFor="let row of config.allDocs ? (rows|search: filter_filter: (config.searchBy||'title')|perPage: config: sort_type: filter_filter + now) : rows ; index as i; "
 			>
 				<td *ngIf="config.num">{{row.num}}</td>
 				<ng-container *ngFor="let column of columns">
@@ -246,9 +249,7 @@
 								{{pageSize}}
 							</div>
 						</div>
-						<div
-							class="item"
-						>
+						<div class="item" *ngIf="config.allDocs">
 							<div
 								[class.selected]="config.perPage === -1"
 								(click)="changePerPage(-1)"
@@ -258,7 +259,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="item-page__result" *ngIf="config.perPage >= 0">
+				<div
+					class="item-page__result"
+					*ngIf="config.perPage >= 0 && !config.allDocs"
+				>
+					Page {{config.page}}
+				</div>
+				<div
+					class="item-page__result"
+					*ngIf="config.perPage >= 0 && config.allDocs"
+				>
 					<span>
 						{{((config.page-1)*config.perPage)+1}} -
 						{{config.page*config.perPage >
@@ -271,7 +281,10 @@
 					</span>
 				</div>
 			</div>
-			<div class="table-footer__pagination" *ngIf="config.perPage">
+			<div
+				class="table-footer__pagination"
+				*ngIf="config.perPage && config.allDocs"
+			>
 				<wbutton
 					class="table-footer__arrow _start"
 					[disabled]="config.page === 1"
@@ -297,6 +310,25 @@
 					class="table-footer__arrow _end"
 					[disabled]="isLast()"
 					(click)="lastPage()"
+				>
+					<i class="chevron"></i>
+				</wbutton>
+			</div>
+			<div
+				class="table-footer__pagination"
+				*ngIf="!config.allDocs"
+			>
+				<wbutton
+					class="table-footer__arrow _left"
+					[disabled]="config.page === 1"
+					(click)="previous()"
+				>
+					<i class="chevron"></i>
+				</wbutton>
+				<wbutton
+					[disabled]="rows.length !== config.perPage"
+					class="table-footer__arrow _right"
+					(click)="next()"
 				>
 					<i class="chevron"></i>
 				</wbutton>

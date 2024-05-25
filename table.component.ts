@@ -24,7 +24,7 @@ import { StoreService } from 'wacom';
 	styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit, AfterContentInit {
-	constructor(private _router: Router, private _store: StoreService) { }
+	constructor(private _router: Router, private _store: StoreService) {}
 
 	tableId =
 		'table_' +
@@ -102,7 +102,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 			}
 		}
 
-		this._store.get(this.tableId + 'perPage', perPage => {
+		this._store.get(this.tableId + 'perPage', (perPage) => {
 			if (perPage) {
 				this.changePerPage(Number(perPage));
 			}
@@ -111,7 +111,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 
 	default_config(): void {
 		if (!this.config.pageSizeOptions) {
-			this.config.pageSizeOptions = [5, 10, 25];
+			this.config.pageSizeOptions = [1, 10, 20, 50];
 		}
 
 		if (!this.config.perPage) {
@@ -124,6 +124,10 @@ export class TableComponent implements OnInit, AfterContentInit {
 
 		if (!this.config.searchable) {
 			this.config.searchable = false;
+		}
+
+		if (typeof this.config.allDocs !== 'boolean') {
+			this.config.allDocs = true;
 		}
 	}
 
@@ -147,8 +151,15 @@ export class TableComponent implements OnInit, AfterContentInit {
 	}
 
 	next(): void {
-		if (this.config.page * this.config.perPage < this.rows.length) {
+		if (
+			typeof this.config.paginate === 'function' ||
+			this.config.page * this.config.perPage < this.rows.length
+		) {
 			this.config.page += 1;
+		}
+
+		if (typeof this.config.paginate === 'function') {
+			this.config.paginate(this.config.page);
 		}
 
 		this.refresh();
@@ -157,13 +168,27 @@ export class TableComponent implements OnInit, AfterContentInit {
 	previous(): void {
 		if (this.config.page > 1) {
 			this.config.page -= 1;
-		}
 
-		this.refresh();
+			if (typeof this.config.paginate === 'function') {
+				this.config.paginate(this.config.page);
+			}
+
+			this.refresh();
+		}
 	}
 
 	changePerPage(row: any): void {
 		this.config.perPage = row;
+
+		if (typeof this.config.setPerPage === 'function') {
+			this.config.setPerPage(this.config.perPage);
+		}
+
+		this.config.page = 1;
+
+		if (typeof this.config.paginate === 'function') {
+			this.config.paginate(this.config.page);
+		}
 
 		this._store.set(this.tableId + 'perPage', row.toString());
 
@@ -184,7 +209,7 @@ export class TableComponent implements OnInit, AfterContentInit {
 		return (
 			(this.rows &&
 				this.config.page ==
-				Math.ceil(this.rows.length / this.config.perPage)) ||
+					Math.ceil(this.rows.length / this.config.perPage)) ||
 			false
 		);
 	}
