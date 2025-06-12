@@ -1,33 +1,32 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { WacomModule } from 'wacom';
 import { TableComponent } from './table.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { WacomModule } from 'wacom';
 import {
 	ActionsDirective,
 	CellDirective,
 	CustomEditDirective,
 	SortDirective
 } from './table.directive';
-
+import { ButtonModule } from '../button/button.module';
 import { RouterModule } from '@angular/router';
-import { ButtonComponent } from '../button/button.component';
-import { FormModule } from '../form/form.module';
 import { InputModule } from '../input/input.module';
-import { TranslateModule } from '../translate/translate.module';
 import { PerPagePipe } from './per-page.pipe';
+import { FormModule } from '../form/form.module';
+import { TranslateModule } from '../translate/translate.module';
 
 @NgModule({
 	imports: [
-    CommonModule,
-    FormsModule,
-    WacomModule,
-    FormModule,
-    RouterModule,
-    InputModule,
-    TranslateModule,
-	ButtonComponent
-],
+		CommonModule,
+		FormsModule,
+		WacomModule,
+		FormModule,
+		ButtonModule,
+		RouterModule,
+		InputModule,
+		TranslateModule
+	],
 	declarations: [
 		TableComponent,
 		CellDirective,
